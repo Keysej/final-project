@@ -1,0 +1,630 @@
+/* ============================================================
+   custom.css — project overrides on top of Start Bootstrap Creative.
+   Loaded after css/styles.css so anything here wins.
+
+   The template already gives us:
+     - Bootstrap 4.6 base
+     - Merriweather + Merriweather Sans typography
+     - .masthead with a brown overlay + bg image
+     - .page-section padding, hr.divider accent (#f4623a)
+     - #mainNav transparent-until-scrolled behavior
+
+   We keep the template's warm orange accent and add:
+     - A soft teal as a secondary accent
+     - Stakeholder/option cards, callouts, issue blocks
+     - Numbered discussion list
+     - The Agent Zero chat UI
+     - Accessibility polish (focus rings, skip link)
+   ============================================================ */
+
+:root {
+  --c-accent: #f4623a;          /* template's existing accent (kept) */
+  --c-accent-dark: #d44a23;
+  --c-accent-soft: #FDE5DA;
+
+  --c-teal: #2A9D8F;            /* secondary accent we add */
+  --c-teal-dark: #1F7A6F;
+  --c-teal-soft: #E2F1EF;
+
+  --c-warning: #C97B3F;
+  --c-warning-soft: #FBEAD7;
+
+  --c-text: #2D3142;
+  --c-text-soft: #4F5365;
+  --c-text-muted: #7B7F8F;
+
+  --c-border: #E5DFD3;
+  --c-surface: #FFFFFF;
+
+  --c-radius: 12px;
+  --c-shadow-sm: 0 1px 2px rgba(45, 49, 66, 0.06), 0 1px 3px rgba(45, 49, 66, 0.04);
+  --c-shadow-md: 0 4px 12px rgba(45, 49, 66, 0.08), 0 2px 4px rgba(45, 49, 66, 0.04);
+}
+
+/* ---------- Skip link ---------- */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #212529;
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 2000;
+  font-weight: 700;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 12px;
+  top: 12px;
+  outline: 3px solid var(--c-accent);
+}
+
+/* ---------- Focus rings everywhere ---------- */
+a:focus,
+button:focus,
+.btn:focus,
+.nav-link:focus,
+summary:focus,
+[tabindex]:focus {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Anchor offset so headings clear the fixed nav ---------- */
+html {
+  scroll-padding-top: 80px;
+}
+
+/* ---------- Masthead extras (eyebrow line above the headline) ---------- */
+.masthead-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+/* The template's masthead h1 uses text-uppercase which makes our long title
+   feel shouty. Soften it for readability without losing the template look. */
+header.masthead h1 {
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+/* ---------- Section helpers ---------- */
+.section-heading {
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 700;
+  color: var(--c-text);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  margin-bottom: 0;
+}
+.sub-heading {
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 700;
+  color: var(--c-accent-dark);
+  font-size: 1.4rem;
+  margin: 2.25rem 0 0.75rem;
+}
+.section-lede {
+  font-size: 1.15rem;
+  color: var(--c-text-soft);
+  max-width: 50ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Slightly tighter page-section so the page doesn't feel sparse on a content-heavy site */
+.page-section {
+  padding: 6rem 0;
+}
+@media (max-width: 768px) {
+  .page-section { padding: 4rem 0; }
+}
+
+/* ---------- Pull quotes & inline quotes ---------- */
+.pull-quote {
+  border-left: 4px solid var(--c-teal);
+  padding: 1rem 1.25rem;
+  margin: 2rem 0;
+  background: var(--c-teal-soft);
+  border-radius: 0 var(--c-radius) var(--c-radius) 0;
+}
+.pull-quote p {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+  color: var(--c-text);
+}
+.pull-quote footer {
+  font-size: 0.95rem;
+  color: var(--c-text-muted);
+}
+.pull-quote--small p { font-size: 1.05rem; }
+
+.inline-quote {
+  border-left: 3px solid var(--c-text-muted);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0 1.25rem;
+  font-style: italic;
+  color: var(--c-text-soft);
+}
+.inline-quote footer {
+  font-style: normal;
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  margin-top: 0.25rem;
+}
+
+/* ---------- Callouts ---------- */
+.callout {
+  border-radius: var(--c-radius);
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  border-left: 5px solid var(--c-warning);
+  background: var(--c-warning-soft);
+}
+.callout-info {
+  border-left-color: var(--c-teal);
+  background: var(--c-teal-soft);
+}
+.callout-label {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-warning);
+  margin-bottom: 0.5rem;
+}
+.callout-info .callout-label { color: var(--c-teal-dark); }
+.callout-source {
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* ---------- Issue blocks (Section 2) ---------- */
+.issue-block {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.issue-block:last-child { border-bottom: none; }
+.issue-icon {
+  flex: 0 0 auto;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--c-accent-soft);
+  color: var(--c-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+}
+.issue-body { flex: 1 1 auto; }
+.issue-body h3 {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: var(--c-text);
+}
+@media (max-width: 576px) {
+  .issue-block { flex-direction: column; gap: 0.75rem; }
+}
+
+/* ---------- Stakeholder cards (Section 3) ---------- */
+.stakeholder-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  padding: 1.75rem;
+  height: 100%;
+  box-shadow: var(--c-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stakeholder-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--c-shadow-md);
+}
+.stakeholder-card h3 {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.25rem;
+  margin-bottom: 0.75rem;
+  color: var(--c-text);
+}
+.stakeholder-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--c-accent-soft);
+  color: var(--c-accent-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.stakeholder-card--highlight {
+  border-color: var(--c-accent);
+  border-width: 2px;
+  background: linear-gradient(180deg, #fff 0%, var(--c-accent-soft) 100%);
+}
+.stakeholder-card--highlight .stakeholder-icon {
+  background: var(--c-accent);
+  color: #fff;
+}
+.stakeholder-flag {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--c-accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ---------- Tech-pros expandable section ---------- */
+.tech-section {
+  margin: 3rem 0 1rem;
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  background: var(--c-surface);
+  overflow: hidden;
+}
+.tech-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  background: #f8f5ef;
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.tech-toggle:hover { background: #f1ecdf; }
+.tech-toggle-label {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--c-text);
+}
+.tech-toggle-hint {
+  font-size: 0.9rem;
+  color: var(--c-text-muted);
+  flex: 1 1 auto;
+}
+.tech-toggle-icon {
+  color: var(--c-accent);
+  transition: transform 0.2s ease;
+}
+.tech-toggle[aria-expanded="true"] .tech-toggle-icon {
+  transform: rotate(180deg);
+}
+.tech-content {
+  padding: 1.5rem;
+  background: var(--c-surface);
+}
+.tech-content h4 {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.1rem;
+  margin: 1.5rem 0 0.5rem;
+  color: var(--c-accent-dark);
+}
+.tech-content h4:first-child { margin-top: 0; }
+.tech-content ul { padding-left: 1.25rem; margin-bottom: 1.25rem; }
+.tech-content li { margin-bottom: 0.5rem; }
+.tech-footnote {
+  font-size: 0.85rem;
+  color: var(--c-text-muted);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--c-border);
+}
+
+/* ---------- Options cards (Section 5) ---------- */
+.option-card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  padding: 1.75rem;
+  height: 100%;
+  box-shadow: var(--c-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+.option-number {
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--c-text-muted);
+  margin-bottom: 0.5rem;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.option-card h3 {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.35rem;
+  margin-bottom: 0.75rem;
+}
+.option-card h4 {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--c-text-muted);
+  margin: 1rem 0 0.5rem;
+}
+.option-summary { margin-bottom: 1rem; color: var(--c-text-soft); }
+.option-card ul { padding-left: 1.1rem; margin-bottom: 0.5rem; }
+.option-card li { margin-bottom: 0.35rem; font-size: 0.95rem; }
+.option-card--recommended {
+  border-color: var(--c-accent);
+  border-width: 2px;
+  background: linear-gradient(180deg, #fff 0%, var(--c-accent-soft) 100%);
+}
+.option-card--recommended .option-number { color: var(--c-accent-dark); }
+.ethical-lens {
+  margin-top: 1rem;
+  border-top: 1px dashed var(--c-border);
+  padding-top: 0.75rem;
+}
+.ethical-lens summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--c-accent-dark);
+  list-style: none;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.ethical-lens summary::-webkit-details-marker { display: none; }
+.ethical-lens summary::before { content: "+ "; font-weight: 900; }
+.ethical-lens[open] summary::before { content: "− "; }
+.ethical-lens p {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  color: var(--c-text-soft);
+}
+
+.why-option-3 {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-left: 5px solid var(--c-accent);
+  border-radius: var(--c-radius);
+  padding: 1.5rem 1.75rem;
+  margin-top: 1rem;
+}
+.why-option-3 h3 {
+  font-family: "Merriweather", Georgia, serif;
+  font-size: 1.3rem;
+  margin-bottom: 0.75rem;
+  color: var(--c-accent-dark);
+}
+.why-option-3 p { margin-bottom: 0; }
+
+/* ---------- Agent Zero chat UI ---------- */
+.agent-window {
+  border: 1px solid var(--c-border);
+  border-radius: 18px;
+  background: var(--c-surface);
+  box-shadow: var(--c-shadow-md);
+  overflow: hidden;
+}
+.agent-window-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.1rem;
+  background: linear-gradient(90deg, var(--c-accent) 0%, var(--c-accent-dark) 100%);
+  color: #fff;
+  font-family: "Merriweather Sans", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.agent-status-dot {
+  width: 10px; height: 10px;
+  background: #FFE066;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 0 0 rgba(255, 224, 102, 0.6);
+  animation: a0pulse 2s infinite;
+}
+@keyframes a0pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0.6); }
+  70%  { box-shadow: 0 0 0 8px rgba(255, 224, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 224, 102, 0); }
+}
+.agent-status-text { flex: 1 1 auto; }
+.agent-reset {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.agent-reset:hover, .agent-reset:focus { background: rgba(255,255,255,0.28); }
+
+.agent-transcript {
+  padding: 1.25rem;
+  min-height: 320px;
+  max-height: 480px;
+  overflow-y: auto;
+  background: #FBF7F0;
+}
+.agent-message {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  animation: a0fadein 0.25s ease;
+}
+@keyframes a0fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.agent-message-avatar {
+  flex: 0 0 auto;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.agent-message--bot .agent-message-avatar { background: var(--c-accent); }
+.agent-message--user .agent-message-avatar { background: var(--c-text-soft); }
+.agent-message--system .agent-message-avatar { background: var(--c-warning); }
+.agent-message-body {
+  background: #fff;
+  padding: 0.7rem 1rem;
+  border-radius: 14px 14px 14px 4px;
+  max-width: 78%;
+  box-shadow: var(--c-shadow-sm);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+.agent-message--user .agent-message-body {
+  background: var(--c-accent-soft);
+  border-radius: 14px 14px 4px 14px;
+}
+.agent-message--system .agent-message-body {
+  background: var(--c-warning-soft);
+  font-style: italic;
+}
+.agent-message--outcome-good .agent-message-body { border-left: 4px solid #4CAF50; }
+.agent-message--outcome-bad .agent-message-body { border-left: 4px solid #D9534F; }
+.agent-message--outcome-mixed .agent-message-body { border-left: 4px solid var(--c-warning); }
+
+.agent-choices {
+  padding: 1rem;
+  background: #fff;
+  border-top: 1px solid var(--c-border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.agent-choice {
+  background: var(--c-surface);
+  border: 1.5px solid var(--c-border);
+  color: var(--c-text);
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: "Merriweather Sans", sans-serif;
+}
+.agent-choice:hover, .agent-choice:focus {
+  border-color: var(--c-accent);
+  background: var(--c-accent-soft);
+  color: var(--c-accent-dark);
+}
+.agent-choice--scenario {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: #fff;
+}
+.agent-choice--scenario:hover, .agent-choice--scenario:focus {
+  background: var(--c-accent-dark);
+  border-color: var(--c-accent-dark);
+  color: #fff;
+}
+.agent-typing {
+  display: inline-flex;
+  gap: 4px;
+  padding: 0.6rem 1rem;
+}
+.agent-typing span {
+  width: 7px; height: 7px;
+  background: var(--c-text-muted);
+  border-radius: 50%;
+  animation: a0typing 1.2s infinite ease-in-out;
+}
+.agent-typing span:nth-child(2) { animation-delay: 0.15s; }
+.agent-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes a0typing {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40%           { transform: scale(1);   opacity: 1; }
+}
+.agent-note {
+  text-align: center;
+  font-size: 0.88rem;
+  color: var(--c-text-muted);
+  margin-top: 1rem;
+  margin-bottom: 0;
+}
+
+/* ---------- Discussion list (Section 6) ---------- */
+.discussion-list {
+  counter-reset: discussion;
+  list-style: none;
+  padding-left: 0;
+}
+.discussion-list > li {
+  counter-increment: discussion;
+  position: relative;
+  padding: 1.25rem 1.5rem 1.25rem 4.5rem;
+  margin-bottom: 1rem;
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--c-radius);
+  box-shadow: var(--c-shadow-sm);
+}
+.discussion-list > li::before {
+  content: counter(discussion);
+  position: absolute;
+  left: 1.25rem;
+  top: 1.1rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: var(--c-accent);
+  color: #fff;
+  font-family: "Merriweather", Georgia, serif;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.discussion-list p { margin: 0; }
+
+/* ---------- Footer additions ---------- */
+.footer-heading {
+  font-family: "Merriweather Sans", sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.works-cited {
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.8);
+}
+.works-cited li { margin-bottom: 0.5rem; }
+.works-cited a { color: #ffb89e; }
+.works-cited a:hover, .works-cited a:focus { color: #fff; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

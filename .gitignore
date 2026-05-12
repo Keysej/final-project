@@ -1,0 +1,11 @@
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Editor / IDE noise
+.vscode/
+.idea/
+*.swp
+
+# Claude helper file
+.claude-helper.log
